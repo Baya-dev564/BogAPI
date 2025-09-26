@@ -38,4 +38,12 @@ class Database {
         // Je retourne la connexion
         return $this->pdo;
     }
+
+    /**
+     * Je ajoute un alias pour getConnection() (compatibilité)
+     */
+    public function getConnection() {
+        return $this->connect();
+    }
 }
+?>

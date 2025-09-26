@@ -1,8 +1,8 @@
 <?php
-// BlogAPI - Point d'entrée principal
+// BlogAPI - Point d'entrée principal avec routing
 // Développé par Baya AMELLAL PAYAN
 
-// Je active l'affichage des erreurs pour le débogage
+// Je active l'affichage des erreurs pour le développement
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,11 +19,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// Je renvoie les informations de base de l'API
-echo json_encode([
-    'message' => 'BlogAPI - Développé par Baya AMELLAL PAYAN',
-    'version' => '1.0.0',
-    'status' => 'active',
-    'php_version' => phpversion()
-]);
+// Je charge les classes nécessaires
+require_once '../config/Database.php';
+require_once '../app/core/Router.php';
+require_once '../app/models/User.php';
+require_once '../app/models/Article.php';
+require_once '../app/models/Category.php';
+require_once '../app/controllers/HomeController.php';
+require_once '../app/controllers/UserController.php';
+require_once '../app/controllers/ArticleController.php';
+require_once '../app/controllers/CategoryController.php';
+
+try {
+    // Je initialise la base de données
+    $database = new Database();
+    
+    // Je crée le router
+    $router = new Router($database);
+
+    // === DÉFINITION DES ROUTES API ===
+    
+    // Routes GET des articles
+    $router->get('/api/articles', 'ArticleController', 'getAll');
+    $router->get('/api/articles/{slug}', 'ArticleController', 'getBySlug');
+    
+    // Route POST pour créer un article
+    $router->post('/api/articles', 'ArticleController', 'create');
+    
+    // Routes des utilisateurs  
+    $router->get('/api/users', 'UserController', 'getAll');
+    $router->get('/api/users/{id}', 'UserController', 'getById');
+    
+    // Routes des catégories
+    $router->get('/api/categories', 'CategoryController', 'getAll');
+    $router->get('/api/categories/count', 'CategoryController', 'getWithCount');
+    $router->get('/api/categories/{slug}', 'CategoryController', 'getBySlug');
+    
+    // Route par défaut (info API)
+    $router->get('/', 'HomeController', 'index');
+
+    // Je traite la requête
+    $router->dispatch();
+
+} catch (Exception $e) {
+    // Je gère les erreurs globales
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Erreur de serveur',
+        'error' => $e->getMessage()
+    ]);
+}
 ?>
