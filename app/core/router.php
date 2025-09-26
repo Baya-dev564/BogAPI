@@ -25,6 +25,8 @@ class Router {
         $this->addRoute('POST', $path, $controller, $method);
     }
 
+    
+
     /**
      * Je ajoute une route à la liste
      */
@@ -37,6 +39,7 @@ class Router {
         ];
     }
 
+    
     /**
      * Je traite la requête et trouve la route correspondante
      */
@@ -59,19 +62,27 @@ class Router {
     /**
      * Je récupère le chemin de la requête
      */
-    private function getPath() {
-        $path = $_SERVER['REQUEST_URI'];
-        
-        // Je retire les paramètres GET
-        if (($pos = strpos($path, '?')) !== false) {
-            $path = substr($path, 0, $pos);
-        }
-        
-        // Je retire le dossier public si présent
-        $path = str_replace('/public', '', $path);
-        
-        return $path === '' ? '/' : $path;
+   
+private function getPath() {
+    // Je check d'abord le paramètre url
+    if (isset($_GET['url'])) {
+        $path = '/' . trim($_GET['url'], '/');
+        return $path === '/' ? '/' : $path;
     }
+    
+    // Sinon j'utilise REQUEST_URI
+    $path = $_SERVER['REQUEST_URI'];
+    
+    // Je retire les paramètres GET
+    if (($pos = strpos($path, '?')) !== false) {
+        $path = substr($path, 0, $pos);
+    }
+    
+    // Je retire le dossier public si présent
+    $path = str_replace('/public', '', $path);
+    
+    return $path === '' ? '/' : $path;
+}
 
     /**
      * Je vérifie si la route correspond à la requête

@@ -39,9 +39,12 @@ try {
 
     // === DÉFINITION DES ROUTES API ===
     
-    // Routes des articles
+    // Routes GET des articles
     $router->get('/api/articles', 'ArticleController', 'getAll');
     $router->get('/api/articles/{slug}', 'ArticleController', 'getBySlug');
+    
+    // Route POST pour créer un article
+    $router->post('/api/articles', 'ArticleController', 'create');
     
     // Routes des utilisateurs  
     $router->get('/api/users', 'UserController', 'getAll');
@@ -53,8 +56,7 @@ try {
     $router->get('/api/categories/{slug}', 'CategoryController', 'getBySlug');
     
     // Route par défaut (info API)
-  
-$router->get('/', 'HomeController', 'index');
+    $router->get('/', 'HomeController', 'index');
 
     // Je traite la requête
     $router->dispatch();
