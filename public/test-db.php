@@ -7,7 +7,7 @@ try {
     $database = new Database();
     $conn = $database->getConnection();
     
-    echo "✅ Connexion DB OK<br>";
+    echo " Connexion DB OK<br>";
     
     $stmt = $conn->query("SELECT * FROM articles");
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,6 +22,6 @@ try {
     echo json_encode(['success' => true, 'count' => count($articles), 'data' => $articles]);
     
 } catch (Exception $e) {
-    echo "❌ Erreur: " . $e->getMessage();
+    echo " Erreur: " . $e->getMessage();
 }
 ?>
