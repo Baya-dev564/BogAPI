@@ -4,7 +4,7 @@
 class AdminPanel {
     constructor() {
         // Je définis l'URL de base de mon API
-        this.apiBaseUrl = 'http://blogapi.test/public/index.php?url=api';
+        this.apiBaseUrl = 'http://127.0.0.1/BlogAPI/public/api/index.php?url=api';
         
         // Je initialise le panel admin
         this.init();

@@ -1,0 +1,9 @@
+# BlogAPI - Configuration pour le dossier API
+# Développé par Baya AMELLAL PAYAN
+
+RewriteEngine On
+
+# Rediriger toutes les requêtes vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
