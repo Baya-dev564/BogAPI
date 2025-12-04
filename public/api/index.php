@@ -2,16 +2,11 @@
 // BlogAPI - Point d'entrée principal avec routing
 // Développé par Baya AMELLAL PAYAN
 
-// Je active l'affichage des erreurs pour le développement
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Je configure les headers pour l'API REST
-header('Content-Type: application/json');
+// JE CONFIGURE LES HEADERS CORS EN TOUT PREMIER (AVANT TOUT AUTRE CODE)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Content-Type: application/json; charset=UTF-8');
 
 // Je gère les requêtes OPTIONS (preflight CORS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -19,16 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// Je charge les classes nécessaires
-require_once '../config/Database.php';
-require_once '../app/core/Router.php';
-require_once '../app/models/User.php';
-require_once '../app/models/Article.php';
-require_once '../app/models/Category.php';
-require_once '../app/controllers/HomeController.php';
-require_once '../app/controllers/UserController.php';
-require_once '../app/controllers/ArticleController.php';
-require_once '../app/controllers/CategoryController.php';
+// Je active l'affichage des erreurs pour le développement
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Je charge les classes nécessaires (AVEC LES BONS NOMS DE FICHIERS)
+require_once '../../config/database.php';
+require_once '../../app/core/router.php';
+require_once '../../app/models/User.php';
+require_once '../../app/models/Article.php';
+require_once '../../app/models/Category.php';
+require_once '../../app/controllers/HomeController.php';
+require_once '../../app/controllers/UserController.php';
+require_once '../../app/controllers/ArticleController.php';
+require_once '../../app/controllers/CategoryController.php';
 
 try {
     // Je initialise la base de données

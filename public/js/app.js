@@ -4,7 +4,7 @@
 class BlogAPI {
     constructor() {
         // Je définis l'URL de base de mon API
-        this.apiBaseUrl = 'http://blogapi.test/public/api';
+        this.apiBaseUrl = 'http://127.0.0.1/BlogAPI/public/api/index.php?url=api';
         
         // Je initialise l'application
         this.init();
@@ -24,31 +24,31 @@ class BlogAPI {
     }
 
     /**
- * Je configure les événements de navigation
- */
-setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // JE NE BLOQUE PAS le lien admin !
-            if (link.classList.contains('admin-link')) {
-                return; // Je laisse le lien normal fonctionner
-            }
-            
-            e.preventDefault();
-            
-            // Je retire la classe active
-            navLinks.forEach(l => l.classList.remove('active'));
-            // Je l'ajoute au lien cliqué
-            link.classList.add('active');
-            
-            // Je affiche la section correspondante
-            const section = link.getAttribute('href').replace('#', '');
-            this.showSection(section);
+     * Je configure les événements de navigation
+     */
+    setupNavigation() {
+        const navLinks = document.querySelectorAll('.nav a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // JE NE BLOQUE PAS le lien admin !
+                if (link.classList.contains('admin-link')) {
+                    return; // Je laisse le lien normal fonctionner
+                }
+                
+                e.preventDefault();
+                
+                // Je retire la classe active
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Je l'ajoute au lien cliqué
+                link.classList.add('active');
+                
+                // Je affiche la section correspondante
+                const section = link.getAttribute('href').replace('#', '');
+                this.showSection(section);
+            });
         });
-    });
-}
+    }
 
     /**
      * Je affiche une section spécifique

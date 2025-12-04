@@ -1,7 +1,6 @@
 <?php
 // BlogAPI - Contrôleur de la page d'accueil
 // Développé par Baya AMELLAL PAYAN
-require_once '../app/controllers/HomeController.php';
 
 class HomeController {
     private $db;
