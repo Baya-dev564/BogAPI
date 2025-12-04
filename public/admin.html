@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogAPI - Panel Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1><i class="fas fa-cogs"></i> BlogAPI - Administration</h1>
+            <p>Panel développé par Baya AMELLAL PAYAN</p>
+            <nav style="margin-top: 1rem;">
+                <a href="index.html" style="color: #667eea; text-decoration: none;">
+                    <i class="fas fa-home"></i> Retour à l'accueil
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Section Ajouter Article -->
+            <section>
+                <h2><i class="fas fa-plus"></i> Ajouter un Article</h2>
+                
+                <!-- Formulaire HTML classique avec POST -->
+                <form action="http://127.0.0.1/BlogAPI/public/api/index.php?url=api/articles" method="POST" class="admin-form">
+                    <div class="form-group">
+                        <label>Titre :</label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contenu :</label>
+                        <textarea name="content" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Catégorie :</label>
+                        <select name="category_id">
+                            <option value="1">Technologie</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Auteur :</label>
+                        <select name="author_id">
+                            <option value="1">Baya AMELLAL PAYAN</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Créer l'article
+                    </button>
+                </form>
+                
+                <div id="add-result" class="result"></div>
+            </section>
+
+            <!-- Section Test API Complet -->
+            <section>
+                <h2><i class="fas fa-flask"></i> Test API Complet</h2>
+                <div class="api-tests">
+                    <button onclick="testAPI('users')" class="btn-test">
+                        <i class="fas fa-users"></i> Tester /api/users
+                    </button>
+                    <button onclick="testAPI('categories')" class="btn-test">
+                        <i class="fas fa-tags"></i> Tester /api/categories
+                    </button>
+                    <button onclick="testAPI('articles/1')" class="btn-test">
+                        <i class="fas fa-eye"></i> Tester /api/articles/1
+                    </button>
+                    <button onclick="testAPI('articles/mon-premier-article')" class="btn-test">
+                        <i class="fas fa-link"></i> Tester /api/articles/slug
+                    </button>
+                </div>
+                <pre id="api-results"></pre>
+            </section>
+
+            <!-- Section Statistiques -->
+            <section>
+                <h2><i class="fas fa-chart-bar"></i> Statistiques</h2>
+                <div id="stats-container" class="stats-grid"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

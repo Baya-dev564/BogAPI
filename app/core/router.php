@@ -62,9 +62,7 @@ class Router {
     /**
      * Je récupère le chemin de la requête
      */
-   /**
- * Je récupère le chemin de la requête
- */
+   
 private function getPath() {
     // Je check d'abord le paramètre url
     if (isset($_GET['url'])) {
