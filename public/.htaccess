@@ -1,4 +1,15 @@
+# BlogAPI - Configuration Apache
+# Développé par Baya AMELLAL PAYAN
+
 RewriteEngine On
+
+# Si c'est un fichier ou dossier existant, ne pas réécrire
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d  
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rediriger toutes les requêtes /api/* vers api/index.php
+RewriteRule ^api/(.*)$ api/index.php?url=$1 [QSA,L]
+
+# Pour les fichiers statiques (HTML, CSS, JS), les servir directement
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
